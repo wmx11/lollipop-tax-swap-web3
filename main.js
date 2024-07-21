@@ -5,12 +5,12 @@ const abi = require("./abi.json");
 dotenv.config();
 
 const web3 = new Web3({
-  provider: "https://bsc-testnet-dataseed.bnbchain.org",
+  provider: "https://bsc-dataseed.bnbchain.org",
 });
 
-const TOKEN_ADDRESS = "0xcCb181807bb845FE2ca80828069A5f529202Aea9";
+const TOKEN_ADDRESS = "0xAF4B52275C0d1a0f5b7BF9e3187120Ea30a79dD2";
 const TAX_SWAP_ADDRESS = "0x9B251326E4c3534185DCcD2C49Ee88e6503d7557";
-const OWNER_ADDRESS = "0xb3A7Ab89c3a0e209b45338f1eCe30Dc246C0c4c0";
+const OWNER_ADDRESS = "0xb77B8e2A7F3de960f37e1b93b9Bcc6f198EE401C";
 
 const token = new web3.eth.Contract(abi, TOKEN_ADDRESS);
 const taxSwap = new web3.eth.Contract(abi, TAX_SWAP_ADDRESS);
@@ -48,7 +48,7 @@ const main = async () => {
 (async () => {
   const run = async () => {
     await main();
-    setTimeout(run, 5000);
+    setTimeout(run, 1 * 60 * 60 * 1000);
   };
 
   run();
