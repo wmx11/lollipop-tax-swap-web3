@@ -46,5 +46,10 @@ const main = async () => {
 };
 
 (async () => {
-  await main();
+  const run = async () => {
+    await main();
+    setTimeout(run, 5000);
+  };
+
+  run();
 })();
