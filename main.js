@@ -1,5 +1,6 @@
 const dotenv = require("dotenv");
 const { Web3 } = require("web3");
+const { format } = require("date-fns");
 const abi = require("./abi.json");
 
 dotenv.config();
@@ -16,10 +17,11 @@ const token = new web3.eth.Contract(abi, TOKEN_ADDRESS);
 const taxSwap = new web3.eth.Contract(abi, TAX_SWAP_ADDRESS);
 
 const main = async () => {
+  const date = format(new Date(), "yyyy-MM-dd HH:mm");
   const balance = await token.methods.balanceOf(TAX_SWAP_ADDRESS).call();
 
   if (!balance) {
-    console.log("No balance found. Sleeping.");
+    console.log(date, " ", "No balance found. Sleeping.");
     return false;
   }
 
@@ -41,7 +43,7 @@ const main = async () => {
   );
 
   const receipt = await web3.eth.sendSignedTransaction(signedTx.rawTransaction);
-  console.log("Distribute fees called. Sleeping.");
+  console.log(date, " ", balance, "Distribute fees called. Sleeping.");
   return receipt;
 };
 
